@@ -1,3 +1,5 @@
+@using EMDB
+@using Kendo.Mvc.UI
 @model IEnumerable<EMDB.Packet>
 
 @{
@@ -9,7 +11,43 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+
+<h2>Kendo UI DatePicker</h2>
+
+@(Html.Kendo().DatePicker()
+      .Name("datepicker")
+      .Deferred()
+      )
+
+@(Html.Kendo().Grid<Packet>()
+      .Name("Grid")
+
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.DT).Title("Date");
+          columns.Bound(p => p.Node).Title("Node Name").Width(130);
+          columns.Bound(p => p.E1).Title("E1").Width(130);
+          columns.Bound(p => p.W1).Width(130);
+      })
+      .Pageable()
+      .AutoBind(true)
+      .Sortable()
+      .Scrollable(scr => scr.Height(430))
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Read(read => read.Action("ReadPackets", "Packets"))
+      )
+      )))))
+
+      
+
+@* All initialization scripts are rendered to the bottom of the page, see _Layout.cshtml *@
+@section scripts {
+    @Html.Kendo().DeferredScripts()
+}
+
+@*<table class="table">
     <thead>
         <tr>
                 <th>
@@ -1010,4 +1048,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table>*@

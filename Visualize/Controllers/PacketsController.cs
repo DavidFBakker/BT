@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EMDB;
 using EMDB.Models;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 
 namespace Visualize
 {
@@ -20,10 +22,42 @@ namespace Visualize
         }
 
         // GET: Packets
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([DataSourceRequest] DataSourceRequest request)
         {
-            return View(await _context.Packets.ToListAsync());
+          //  IQueryable<Packet> packets = _context.Packets.Take(10);
+
+         //   DataSourceResult result = await packets.ToDataSourceResultAsync(request);
+            //return Json(result);
+            //return View();
+            //var model = await _context.Packets.Take(10).ToListAsync
+            //var model = await _context.Packets.Take(10).ToListAsync();
+            //ViewBag.Packets = model;
+
+            return View();
         }
+
+        public async Task<IActionResult> ReadPacketsAsync([DataSourceRequest] DataSourceRequest request)
+        {
+            IQueryable<Packet> packets = _context.Packets.Take(10);
+
+            DataSourceResult result = await packets.ToDataSourceResultAsync(request);
+            return Json(result);
+
+            //var model = await _context.Packets.Take(10).ToListAsync();
+            //return View(model);
+        }
+
+        public JsonResult ReadPackets([DataSourceRequest] DataSourceRequest request)
+        {
+            IQueryable<Packet> packets = _context.Packets.Take(10);
+
+            DataSourceResult result =  packets.ToList().ToDataSourceResult(request);
+            return Json(result);
+
+            //var model = await _context.Packets.Take(10).ToListAsync();
+            //return View(model);
+        }
+
 
         // GET: Packets/Details/5
         public async Task<IActionResult> Details(DateTime? id)
