@@ -1,5 +1,6 @@
 ﻿using EMDB.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace EMDB
 {
@@ -7,7 +8,13 @@ namespace EMDB
     {
         public EMContext GetContext()
         {
-            var connection = @"Data Source=192.168.1.12,1433;Initial Catalog=EM;User ID=dev;Password=devR0xR0x;";
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
+
+            var connection = configuration.GetConnectionString("DefaultConnection");
+
             var optionsBuilder = new DbContextOptionsBuilder<EMContext>();
             optionsBuilder.UseSqlServer(connection);
 

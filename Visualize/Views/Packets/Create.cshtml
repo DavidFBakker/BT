@@ -1,0 +1,1190 @@
+@model EMDB.Packet
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Packet</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="DT" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DT" class="form-control" />
+                <span asp-validation-for="DT" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Node" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Node" class="form-control" />
+                <span asp-validation-for="Node" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SC" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="SC" class="form-control" />
+                <span asp-validation-for="SC" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DeltaSeconds" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="DeltaSeconds" class="form-control" />
+                <span asp-validation-for="DeltaSeconds" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="V" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="V" class="form-control" />
+                <span asp-validation-for="V" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="X" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="X" class="form-control" />
+                <span asp-validation-for="X" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E1" class="form-control" />
+                <span asp-validation-for="E1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P1" class="form-control" />
+                <span asp-validation-for="P1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh1" class="form-control" />
+                <span asp-validation-for="Wh1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta1" class="form-control" />
+                <span asp-validation-for="Delta1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W1" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W1" class="form-control" />
+                <span asp-validation-for="W1" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E2" class="form-control" />
+                <span asp-validation-for="E2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P2" class="form-control" />
+                <span asp-validation-for="P2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh2" class="form-control" />
+                <span asp-validation-for="Wh2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta2" class="form-control" />
+                <span asp-validation-for="Delta2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W2" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W2" class="form-control" />
+                <span asp-validation-for="W2" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E3" class="form-control" />
+                <span asp-validation-for="E3" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P3" class="form-control" />
+                <span asp-validation-for="P3" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh3" class="form-control" />
+                <span asp-validation-for="Wh3" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta3" class="form-control" />
+                <span asp-validation-for="Delta3" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W3" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W3" class="form-control" />
+                <span asp-validation-for="W3" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E4" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E4" class="form-control" />
+                <span asp-validation-for="E4" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P4" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P4" class="form-control" />
+                <span asp-validation-for="P4" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh4" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh4" class="form-control" />
+                <span asp-validation-for="Wh4" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta4" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta4" class="form-control" />
+                <span asp-validation-for="Delta4" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W4" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W4" class="form-control" />
+                <span asp-validation-for="W4" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E5" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E5" class="form-control" />
+                <span asp-validation-for="E5" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P5" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P5" class="form-control" />
+                <span asp-validation-for="P5" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh5" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh5" class="form-control" />
+                <span asp-validation-for="Wh5" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta5" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta5" class="form-control" />
+                <span asp-validation-for="Delta5" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W5" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W5" class="form-control" />
+                <span asp-validation-for="W5" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E6" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E6" class="form-control" />
+                <span asp-validation-for="E6" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P6" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P6" class="form-control" />
+                <span asp-validation-for="P6" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh6" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh6" class="form-control" />
+                <span asp-validation-for="Wh6" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta6" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta6" class="form-control" />
+                <span asp-validation-for="Delta6" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W6" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W6" class="form-control" />
+                <span asp-validation-for="W6" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E7" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E7" class="form-control" />
+                <span asp-validation-for="E7" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P7" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P7" class="form-control" />
+                <span asp-validation-for="P7" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh7" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh7" class="form-control" />
+                <span asp-validation-for="Wh7" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta7" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta7" class="form-control" />
+                <span asp-validation-for="Delta7" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W7" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W7" class="form-control" />
+                <span asp-validation-for="W7" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E8" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E8" class="form-control" />
+                <span asp-validation-for="E8" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P8" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P8" class="form-control" />
+                <span asp-validation-for="P8" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh8" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh8" class="form-control" />
+                <span asp-validation-for="Wh8" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta8" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta8" class="form-control" />
+                <span asp-validation-for="Delta8" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W8" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W8" class="form-control" />
+                <span asp-validation-for="W8" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E9" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E9" class="form-control" />
+                <span asp-validation-for="E9" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P9" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P9" class="form-control" />
+                <span asp-validation-for="P9" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh9" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh9" class="form-control" />
+                <span asp-validation-for="Wh9" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta9" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta9" class="form-control" />
+                <span asp-validation-for="Delta9" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W9" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W9" class="form-control" />
+                <span asp-validation-for="W9" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E10" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E10" class="form-control" />
+                <span asp-validation-for="E10" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P10" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P10" class="form-control" />
+                <span asp-validation-for="P10" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh10" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh10" class="form-control" />
+                <span asp-validation-for="Wh10" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta10" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta10" class="form-control" />
+                <span asp-validation-for="Delta10" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W10" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W10" class="form-control" />
+                <span asp-validation-for="W10" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E11" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E11" class="form-control" />
+                <span asp-validation-for="E11" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P11" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P11" class="form-control" />
+                <span asp-validation-for="P11" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh11" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh11" class="form-control" />
+                <span asp-validation-for="Wh11" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta11" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta11" class="form-control" />
+                <span asp-validation-for="Delta11" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W11" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W11" class="form-control" />
+                <span asp-validation-for="W11" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E12" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E12" class="form-control" />
+                <span asp-validation-for="E12" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P12" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P12" class="form-control" />
+                <span asp-validation-for="P12" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh12" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh12" class="form-control" />
+                <span asp-validation-for="Wh12" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta12" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta12" class="form-control" />
+                <span asp-validation-for="Delta12" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W12" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W12" class="form-control" />
+                <span asp-validation-for="W12" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E13" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E13" class="form-control" />
+                <span asp-validation-for="E13" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P13" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P13" class="form-control" />
+                <span asp-validation-for="P13" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh13" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh13" class="form-control" />
+                <span asp-validation-for="Wh13" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta13" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta13" class="form-control" />
+                <span asp-validation-for="Delta13" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W13" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W13" class="form-control" />
+                <span asp-validation-for="W13" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E14" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E14" class="form-control" />
+                <span asp-validation-for="E14" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P14" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P14" class="form-control" />
+                <span asp-validation-for="P14" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh14" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh14" class="form-control" />
+                <span asp-validation-for="Wh14" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta14" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta14" class="form-control" />
+                <span asp-validation-for="Delta14" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W14" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W14" class="form-control" />
+                <span asp-validation-for="W14" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E15" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E15" class="form-control" />
+                <span asp-validation-for="E15" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P15" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P15" class="form-control" />
+                <span asp-validation-for="P15" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh15" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh15" class="form-control" />
+                <span asp-validation-for="Wh15" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta15" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta15" class="form-control" />
+                <span asp-validation-for="Delta15" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W15" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W15" class="form-control" />
+                <span asp-validation-for="W15" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E16" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E16" class="form-control" />
+                <span asp-validation-for="E16" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P16" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P16" class="form-control" />
+                <span asp-validation-for="P16" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh16" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh16" class="form-control" />
+                <span asp-validation-for="Wh16" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta16" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta16" class="form-control" />
+                <span asp-validation-for="Delta16" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W16" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W16" class="form-control" />
+                <span asp-validation-for="W16" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E17" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E17" class="form-control" />
+                <span asp-validation-for="E17" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P17" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P17" class="form-control" />
+                <span asp-validation-for="P17" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh17" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh17" class="form-control" />
+                <span asp-validation-for="Wh17" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta17" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta17" class="form-control" />
+                <span asp-validation-for="Delta17" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W17" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W17" class="form-control" />
+                <span asp-validation-for="W17" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E18" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E18" class="form-control" />
+                <span asp-validation-for="E18" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P18" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P18" class="form-control" />
+                <span asp-validation-for="P18" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh18" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh18" class="form-control" />
+                <span asp-validation-for="Wh18" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta18" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta18" class="form-control" />
+                <span asp-validation-for="Delta18" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W18" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W18" class="form-control" />
+                <span asp-validation-for="W18" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E19" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E19" class="form-control" />
+                <span asp-validation-for="E19" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P19" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P19" class="form-control" />
+                <span asp-validation-for="P19" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh19" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh19" class="form-control" />
+                <span asp-validation-for="Wh19" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta19" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta19" class="form-control" />
+                <span asp-validation-for="Delta19" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W19" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W19" class="form-control" />
+                <span asp-validation-for="W19" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E20" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E20" class="form-control" />
+                <span asp-validation-for="E20" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P20" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P20" class="form-control" />
+                <span asp-validation-for="P20" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh20" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh20" class="form-control" />
+                <span asp-validation-for="Wh20" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta20" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta20" class="form-control" />
+                <span asp-validation-for="Delta20" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W20" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W20" class="form-control" />
+                <span asp-validation-for="W20" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E21" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E21" class="form-control" />
+                <span asp-validation-for="E21" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P21" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P21" class="form-control" />
+                <span asp-validation-for="P21" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh21" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh21" class="form-control" />
+                <span asp-validation-for="Wh21" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta21" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta21" class="form-control" />
+                <span asp-validation-for="Delta21" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W21" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W21" class="form-control" />
+                <span asp-validation-for="W21" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E22" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E22" class="form-control" />
+                <span asp-validation-for="E22" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P22" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P22" class="form-control" />
+                <span asp-validation-for="P22" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh22" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh22" class="form-control" />
+                <span asp-validation-for="Wh22" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta22" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta22" class="form-control" />
+                <span asp-validation-for="Delta22" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W22" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W22" class="form-control" />
+                <span asp-validation-for="W22" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E23" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E23" class="form-control" />
+                <span asp-validation-for="E23" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P23" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P23" class="form-control" />
+                <span asp-validation-for="P23" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh23" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh23" class="form-control" />
+                <span asp-validation-for="Wh23" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta23" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta23" class="form-control" />
+                <span asp-validation-for="Delta23" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W23" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W23" class="form-control" />
+                <span asp-validation-for="W23" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E24" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E24" class="form-control" />
+                <span asp-validation-for="E24" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P24" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P24" class="form-control" />
+                <span asp-validation-for="P24" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh24" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh24" class="form-control" />
+                <span asp-validation-for="Wh24" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta24" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta24" class="form-control" />
+                <span asp-validation-for="Delta24" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W24" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W24" class="form-control" />
+                <span asp-validation-for="W24" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E25" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E25" class="form-control" />
+                <span asp-validation-for="E25" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P25" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P25" class="form-control" />
+                <span asp-validation-for="P25" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh25" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh25" class="form-control" />
+                <span asp-validation-for="Wh25" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta25" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta25" class="form-control" />
+                <span asp-validation-for="Delta25" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W25" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W25" class="form-control" />
+                <span asp-validation-for="W25" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E26" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E26" class="form-control" />
+                <span asp-validation-for="E26" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P26" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P26" class="form-control" />
+                <span asp-validation-for="P26" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh26" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh26" class="form-control" />
+                <span asp-validation-for="Wh26" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta26" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta26" class="form-control" />
+                <span asp-validation-for="Delta26" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W26" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W26" class="form-control" />
+                <span asp-validation-for="W26" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E27" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E27" class="form-control" />
+                <span asp-validation-for="E27" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P27" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P27" class="form-control" />
+                <span asp-validation-for="P27" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh27" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh27" class="form-control" />
+                <span asp-validation-for="Wh27" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta27" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta27" class="form-control" />
+                <span asp-validation-for="Delta27" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W27" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W27" class="form-control" />
+                <span asp-validation-for="W27" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E28" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E28" class="form-control" />
+                <span asp-validation-for="E28" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P28" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P28" class="form-control" />
+                <span asp-validation-for="P28" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh28" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh28" class="form-control" />
+                <span asp-validation-for="Wh28" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta28" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta28" class="form-control" />
+                <span asp-validation-for="Delta28" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W28" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W28" class="form-control" />
+                <span asp-validation-for="W28" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E29" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E29" class="form-control" />
+                <span asp-validation-for="E29" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P29" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P29" class="form-control" />
+                <span asp-validation-for="P29" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh29" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh29" class="form-control" />
+                <span asp-validation-for="Wh29" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta29" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta29" class="form-control" />
+                <span asp-validation-for="Delta29" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W29" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W29" class="form-control" />
+                <span asp-validation-for="W29" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E30" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E30" class="form-control" />
+                <span asp-validation-for="E30" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P30" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P30" class="form-control" />
+                <span asp-validation-for="P30" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh30" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh30" class="form-control" />
+                <span asp-validation-for="Wh30" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta30" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta30" class="form-control" />
+                <span asp-validation-for="Delta30" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W30" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W30" class="form-control" />
+                <span asp-validation-for="W30" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E31" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E31" class="form-control" />
+                <span asp-validation-for="E31" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P31" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P31" class="form-control" />
+                <span asp-validation-for="P31" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh31" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh31" class="form-control" />
+                <span asp-validation-for="Wh31" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta31" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta31" class="form-control" />
+                <span asp-validation-for="Delta31" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W31" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W31" class="form-control" />
+                <span asp-validation-for="W31" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="E32" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="E32" class="form-control" />
+                <span asp-validation-for="E32" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="P32" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="P32" class="form-control" />
+                <span asp-validation-for="P32" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Wh32" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Wh32" class="form-control" />
+                <span asp-validation-for="Wh32" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Delta32" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Delta32" class="form-control" />
+                <span asp-validation-for="Delta32" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="W32" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="W32" class="form-control" />
+                <span asp-validation-for="W32" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

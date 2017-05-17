@@ -1,7 +1,9 @@
-﻿using EMDB.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -14,8 +16,8 @@ namespace Visualize
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", false, true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -27,8 +29,8 @@ namespace Visualize
         {
             // Add framework services.
             services.AddMvc();
-            services.AddDbContext<EMContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddKendo();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,9 +54,12 @@ namespace Visualize
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    "default",
-                    "{controller=Home}/{action=Index}/{id?}");
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            // Configure Kendo UI
+            app.UseKendo(env);
         }
     }
 }
