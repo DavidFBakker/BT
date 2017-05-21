@@ -186,7 +186,14 @@ namespace Visualize
 
         public async Task<IActionResult> Graphs()
         {
-            var model = await _context.Packets.Where(a=> a.Node=="Left Panel" && a.DT.Date==DateTime.Today.Date).OrderBy(a=>a.DT).ToListAsync();
+
+            var db = new EMDB.DB();
+
+            var model=db.GetPackets(60).ToList();
+
+//            var model = await _context.Packets.Where(a=> a.Node=="Left Panel" && a.DT.Date==DateTime.Today.Date).OrderBy(a=>a.DT).ToListAsync();
+
+
             return View(model);
 
          //   return View();

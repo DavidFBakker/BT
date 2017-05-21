@@ -4,25 +4,17 @@ using EMDB;
 
 namespace ConsoleApp1
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-           
+            var incMins = 60;
             Console.WriteLine("Hello World!");
-            var db = new DB();
-            using (var dbContext = db.GetContext())
-            {
-                var res =
-                    dbContext.Packets.ToList();
+           var db = new EMDB.DB();
 
-                foreach (var r in res)
-                {
-                    Console.WriteLine($"{r.Node} {r.E1}");
-                }
-            }
-
-
+            db.GetPackets(incMins);
         }
     }
+
+   
 }

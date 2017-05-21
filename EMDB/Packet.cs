@@ -14,168 +14,168 @@ namespace EMDB
         [Column(Order = 2)]
         public string Node { get; set; }
 
-        public int SC { get; set; }
+        public double SC { get; set; }
         public double DeltaSeconds { get; set; }
         public double V { get; set; }
-        public int X { get; set; }
+        public double X { get; set; }
 
-        public int E1 { get; set; }
-        public int P1 { get; set; }
+        public double E1 { get; set; }
+        public double P1 { get; set; }
         public double Wh1 { get; set; }
         public double Delta1 { get; set; }
         public double W1 { get; set; }
-        public int E2 { get; set; }
-        public int P2 { get; set; }
+        public double E2 { get; set; }
+        public double P2 { get; set; }
         public double Wh2 { get; set; }
         public double Delta2 { get; set; }
         public double W2 { get; set; }
-        public int E3 { get; set; }
-        public int P3 { get; set; }
+        public double E3 { get; set; }
+        public double P3 { get; set; }
         public double Wh3 { get; set; }
         public double Delta3 { get; set; }
         public double W3 { get; set; }
-        public int E4 { get; set; }
-        public int P4 { get; set; }
+        public double E4 { get; set; }
+        public double P4 { get; set; }
         public double Wh4 { get; set; }
         public double Delta4 { get; set; }
         public double W4 { get; set; }
-        public int E5 { get; set; }
-        public int P5 { get; set; }
+        public double E5 { get; set; }
+        public double P5 { get; set; }
         public double Wh5 { get; set; }
         public double Delta5 { get; set; }
         public double W5 { get; set; }
-        public int E6 { get; set; }
-        public int P6 { get; set; }
+        public double E6 { get; set; }
+        public double P6 { get; set; }
         public double Wh6 { get; set; }
         public double Delta6 { get; set; }
         public double W6 { get; set; }
-        public int E7 { get; set; }
-        public int P7 { get; set; }
+        public double E7 { get; set; }
+        public double P7 { get; set; }
         public double Wh7 { get; set; }
         public double Delta7 { get; set; }
         public double W7 { get; set; }
-        public int E8 { get; set; }
-        public int P8 { get; set; }
+        public double E8 { get; set; }
+        public double P8 { get; set; }
         public double Wh8 { get; set; }
         public double Delta8 { get; set; }
         public double W8 { get; set; }
-        public int E9 { get; set; }
-        public int P9 { get; set; }
+        public double E9 { get; set; }
+        public double P9 { get; set; }
         public double Wh9 { get; set; }
         public double Delta9 { get; set; }
         public double W9 { get; set; }
-        public int E10 { get; set; }
-        public int P10 { get; set; }
+        public double E10 { get; set; }
+        public double P10 { get; set; }
         public double Wh10 { get; set; }
         public double Delta10 { get; set; }
         public double W10 { get; set; }
-        public int E11 { get; set; }
-        public int P11 { get; set; }
+        public double E11 { get; set; }
+        public double P11 { get; set; }
         public double Wh11 { get; set; }
         public double Delta11 { get; set; }
         public double W11 { get; set; }
-        public int E12 { get; set; }
-        public int P12 { get; set; }
+        public double E12 { get; set; }
+        public double P12 { get; set; }
         public double Wh12 { get; set; }
         public double Delta12 { get; set; }
         public double W12 { get; set; }
-        public int E13 { get; set; }
-        public int P13 { get; set; }
+        public double E13 { get; set; }
+        public double P13 { get; set; }
         public double Wh13 { get; set; }
         public double Delta13 { get; set; }
         public double W13 { get; set; }
-        public int E14 { get; set; }
-        public int P14 { get; set; }
+        public double E14 { get; set; }
+        public double P14 { get; set; }
         public double Wh14 { get; set; }
         public double Delta14 { get; set; }
         public double W14 { get; set; }
-        public int E15 { get; set; }
-        public int P15 { get; set; }
+        public double E15 { get; set; }
+        public double P15 { get; set; }
         public double Wh15 { get; set; }
         public double Delta15 { get; set; }
         public double W15 { get; set; }
-        public int E16 { get; set; }
-        public int P16 { get; set; }
+        public double E16 { get; set; }
+        public double P16 { get; set; }
         public double Wh16 { get; set; }
         public double Delta16 { get; set; }
         public double W16 { get; set; }
-        public int E17 { get; set; }
-        public int P17 { get; set; }
+        public double E17 { get; set; }
+        public double P17 { get; set; }
         public double Wh17 { get; set; }
         public double Delta17 { get; set; }
         public double W17 { get; set; }
-        public int E18 { get; set; }
-        public int P18 { get; set; }
+        public double E18 { get; set; }
+        public double P18 { get; set; }
         public double Wh18 { get; set; }
         public double Delta18 { get; set; }
         public double W18 { get; set; }
-        public int E19 { get; set; }
-        public int P19 { get; set; }
+        public double E19 { get; set; }
+        public double P19 { get; set; }
         public double Wh19 { get; set; }
         public double Delta19 { get; set; }
         public double W19 { get; set; }
-        public int E20 { get; set; }
-        public int P20 { get; set; }
+        public double E20 { get; set; }
+        public double P20 { get; set; }
         public double Wh20 { get; set; }
         public double Delta20 { get; set; }
         public double W20 { get; set; }
-        public int E21 { get; set; }
-        public int P21 { get; set; }
+        public double E21 { get; set; }
+        public double P21 { get; set; }
         public double Wh21 { get; set; }
         public double Delta21 { get; set; }
         public double W21 { get; set; }
-        public int E22 { get; set; }
-        public int P22 { get; set; }
+        public double E22 { get; set; }
+        public double P22 { get; set; }
         public double Wh22 { get; set; }
         public double Delta22 { get; set; }
         public double W22 { get; set; }
-        public int E23 { get; set; }
-        public int P23 { get; set; }
+        public double E23 { get; set; }
+        public double P23 { get; set; }
         public double Wh23 { get; set; }
         public double Delta23 { get; set; }
         public double W23 { get; set; }
-        public int E24 { get; set; }
-        public int P24 { get; set; }
+        public double E24 { get; set; }
+        public double P24 { get; set; }
         public double Wh24 { get; set; }
         public double Delta24 { get; set; }
         public double W24 { get; set; }
-        public int E25 { get; set; }
-        public int P25 { get; set; }
+        public double E25 { get; set; }
+        public double P25 { get; set; }
         public double Wh25 { get; set; }
         public double Delta25 { get; set; }
         public double W25 { get; set; }
-        public int E26 { get; set; }
-        public int P26 { get; set; }
+        public double E26 { get; set; }
+        public double P26 { get; set; }
         public double Wh26 { get; set; }
         public double Delta26 { get; set; }
         public double W26 { get; set; }
-        public int E27 { get; set; }
-        public int P27 { get; set; }
+        public double E27 { get; set; }
+        public double P27 { get; set; }
         public double Wh27 { get; set; }
         public double Delta27 { get; set; }
         public double W27 { get; set; }
-        public int E28 { get; set; }
-        public int P28 { get; set; }
+        public double E28 { get; set; }
+        public double P28 { get; set; }
         public double Wh28 { get; set; }
         public double Delta28 { get; set; }
         public double W28 { get; set; }
-        public int E29 { get; set; }
-        public int P29 { get; set; }
+        public double E29 { get; set; }
+        public double P29 { get; set; }
         public double Wh29 { get; set; }
         public double Delta29 { get; set; }
         public double W29 { get; set; }
-        public int E30 { get; set; }
-        public int P30 { get; set; }
+        public double E30 { get; set; }
+        public double P30 { get; set; }
         public double Wh30 { get; set; }
         public double Delta30 { get; set; }
         public double W30 { get; set; }
-        public int E31 { get; set; }
-        public int P31 { get; set; }
+        public double E31 { get; set; }
+        public double P31 { get; set; }
         public double Wh31 { get; set; }
         public double Delta31 { get; set; }
         public double W31 { get; set; }
-        public int E32 { get; set; }
-        public int P32 { get; set; }
+        public double E32 { get; set; }
+        public double P32 { get; set; }
         public double Wh32 { get; set; }
         public double Delta32 { get; set; }
         public double W32 { get; set; }
@@ -185,7 +185,7 @@ namespace EMDB
         {
             DeltaSeconds = packet.SC - SC;
             SC = packet.SC;
-            var intervalDiv = DeltaSeconds / 3600;
+            var doubleervalDiv = DeltaSeconds / 3600;
 
             Delta1 = packet.E1 - E1;
             E1 = packet.E1;
@@ -286,38 +286,38 @@ namespace EMDB
             W32 = Delta32 / DeltaSeconds;
 
 
-            Wh1 += packet.P1 * intervalDiv;
-            Wh2 += packet.P2 * intervalDiv;
-            Wh3 += packet.P3 * intervalDiv;
-            Wh4 += packet.P4 * intervalDiv;
-            Wh5 += packet.P5 * intervalDiv;
-            Wh6 += packet.P6 * intervalDiv;
-            Wh7 += packet.P7 * intervalDiv;
-            Wh8 += packet.P8 * intervalDiv;
-            Wh9 += packet.P9 * intervalDiv;
-            Wh10 += packet.P10 * intervalDiv;
-            Wh11 += packet.P11 * intervalDiv;
-            Wh12 += packet.P12 * intervalDiv;
-            Wh13 += packet.P13 * intervalDiv;
-            Wh14 += packet.P14 * intervalDiv;
-            Wh15 += packet.P15 * intervalDiv;
-            Wh16 += packet.P16 * intervalDiv;
-            Wh17 += packet.P17 * intervalDiv;
-            Wh18 += packet.P18 * intervalDiv;
-            Wh19 += packet.P19 * intervalDiv;
-            Wh20 += packet.P20 * intervalDiv;
-            Wh21 += packet.P21 * intervalDiv;
-            Wh22 += packet.P22 * intervalDiv;
-            Wh23 += packet.P23 * intervalDiv;
-            Wh24 += packet.P24 * intervalDiv;
-            Wh25 += packet.P25 * intervalDiv;
-            Wh26 += packet.P26 * intervalDiv;
-            Wh27 += packet.P27 * intervalDiv;
-            Wh28 += packet.P28 * intervalDiv;
-            Wh29 += packet.P29 * intervalDiv;
-            Wh30 += packet.P30 * intervalDiv;
-            Wh31 += packet.P31 * intervalDiv;
-            Wh32 += packet.P32 * intervalDiv;
+            Wh1 += packet.P1 * doubleervalDiv;
+            Wh2 += packet.P2 * doubleervalDiv;
+            Wh3 += packet.P3 * doubleervalDiv;
+            Wh4 += packet.P4 * doubleervalDiv;
+            Wh5 += packet.P5 * doubleervalDiv;
+            Wh6 += packet.P6 * doubleervalDiv;
+            Wh7 += packet.P7 * doubleervalDiv;
+            Wh8 += packet.P8 * doubleervalDiv;
+            Wh9 += packet.P9 * doubleervalDiv;
+            Wh10 += packet.P10 * doubleervalDiv;
+            Wh11 += packet.P11 * doubleervalDiv;
+            Wh12 += packet.P12 * doubleervalDiv;
+            Wh13 += packet.P13 * doubleervalDiv;
+            Wh14 += packet.P14 * doubleervalDiv;
+            Wh15 += packet.P15 * doubleervalDiv;
+            Wh16 += packet.P16 * doubleervalDiv;
+            Wh17 += packet.P17 * doubleervalDiv;
+            Wh18 += packet.P18 * doubleervalDiv;
+            Wh19 += packet.P19 * doubleervalDiv;
+            Wh20 += packet.P20 * doubleervalDiv;
+            Wh21 += packet.P21 * doubleervalDiv;
+            Wh22 += packet.P22 * doubleervalDiv;
+            Wh23 += packet.P23 * doubleervalDiv;
+            Wh24 += packet.P24 * doubleervalDiv;
+            Wh25 += packet.P25 * doubleervalDiv;
+            Wh26 += packet.P26 * doubleervalDiv;
+            Wh27 += packet.P27 * doubleervalDiv;
+            Wh28 += packet.P28 * doubleervalDiv;
+            Wh29 += packet.P29 * doubleervalDiv;
+            Wh30 += packet.P30 * doubleervalDiv;
+            Wh31 += packet.P31 * doubleervalDiv;
+            Wh32 += packet.P32 * doubleervalDiv;
 
             P1 = packet.P1;
             P2 = packet.P2;
