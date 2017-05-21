@@ -22,18 +22,18 @@ namespace Visualize
         }
 
         // GET: Packets
-        public async Task<IActionResult> Index([DataSourceRequest] DataSourceRequest request)
+        public async Task<IActionResult> Index()//[DataSourceRequest] DataSourceRequest request)
         {
-          //  IQueryable<Packet> packets = _context.Packets.Take(10);
+            //IQueryable<Packet> packets = _context.Packets.Take(10);
 
-         //   DataSourceResult result = await packets.ToDataSourceResultAsync(request);
+            //DataSourceResult result = await packets.ToDataSourceResultAsync(request);
             //return Json(result);
             //return View();
             //var model = await _context.Packets.Take(10).ToListAsync
-            //var model = await _context.Packets.Take(10).ToListAsync();
-            //ViewBag.Packets = model;
 
-            return View();
+            //ViewBag.Packets = model;
+            var model = await _context.Packets.Take(10).ToListAsync();
+            return View(model);
         }
 
         public async Task<IActionResult> ReadPacketsAsync([DataSourceRequest] DataSourceRequest request)
@@ -182,6 +182,23 @@ namespace Visualize
         private bool PacketExists(DateTime id)
         {
             return _context.Packets.Any(e => e.DT == id);
+        }
+
+        public async Task<IActionResult> Graphs()
+        {
+            var model = await _context.Packets.Where(a=> a.Node=="Left Panel" && a.DT.Date==DateTime.Today.Date).OrderBy(a=>a.DT).ToListAsync();
+            return View(model);
+
+         //   return View();
+        }
+
+        public async Task<IActionResult> ListRead([DataSourceRequest] DataSourceRequest request)
+        {
+            IQueryable<Packet> packets = _context.Packets.Take(10);
+
+            DataSourceResult result = await packets.ToDataSourceResultAsync(request);
+            var j = Json(result);
+            return j;
         }
     }
 }

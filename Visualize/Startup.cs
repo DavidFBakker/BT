@@ -60,7 +60,7 @@ namespace Visualize
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Packets}/{action=Index}/{id?}");
             });
 
             // Configure Kendo UI

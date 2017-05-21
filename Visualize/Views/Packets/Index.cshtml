@@ -1,5 +1,4 @@
 @using EMDB
-@using Kendo.Mvc.UI
 @model IEnumerable<EMDB.Packet>
 
 @{
@@ -12,6 +11,30 @@
     <a asp-action="Create">Create New</a>
 </p>
 
+<ul id="menu">
+    <li>
+        Normal Item
+        <ul>
+            <li><span class="k-sprite icon-class"></span>Item with a Sprite</li>
+            <li><img src="Icons/contacts.gif" />Item with an Icon</li>
+        </ul>
+    </li>
+    <li><a href="http://www.google.com">Navigation Item</a></li>
+    <li class="k-state-active">Active Item</li>
+    <li>
+        Template Item
+        <div class="k-group k-content">
+            Test button - <a class="k-button">Button</a>
+        </div>
+    </li>
+</ul>
+
+<script>
+    $(document).ready(function() {
+        $("#menu").kendoMenu();
+    });
+</script>
+
 <h2>Kendo UI DatePicker</h2>
 
 @(Html.Kendo().DatePicker()
@@ -19,7 +42,7 @@
       .Deferred()
       )
 
-@(Html.Kendo().Grid<Packet>()
+@(Html.Kendo().Grid(Model)
       .Name("Grid")
 
       .Columns(columns =>
@@ -29,23 +52,22 @@
           columns.Bound(p => p.E1).Title("E1").Width(130);
           columns.Bound(p => p.W1).Width(130);
       })
-      .Pageable()
-      .AutoBind(true)
+      .HtmlAttributes(new { style = "height: 550px;" })
+      .Pageable( pageable => pageable
+          .Input(true)
+          .Numeric(false)
+      )
       .Sortable()
-      .Scrollable(scr => scr.Height(430))
-      .Filterable()
+      .Scrollable(scr=>scr.Height(430)) 
+      .Filterable()    
       .DataSource(dataSource => dataSource
           .Ajax()
-          .Read(read => read.Action("ReadPackets", "Packets"))
+          .PageSize(20)
+          .ServerOperation(false)        
       )
-      )))))
+      )
 
       
-
-@* All initialization scripts are rendered to the bottom of the page, see _Layout.cshtml *@
-@section scripts {
-    @Html.Kendo().DeferredScripts()
-}
 
 @*<table class="table">
     <thead>

@@ -1,0 +1,63 @@
+﻿@using EMDB
+@model IEnumerable<EMDB.Packet>
+
+@{
+    ViewBag.Title = "Graphs";
+    Layout = "_Layout";
+}
+
+<h2>@ViewData["Title"].</h2>
+
+
+@(Html.Kendo().Chart(Model)
+      .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
+      .Title("Internet Users")
+      .Series(series => {
+                            series.Area(model => model.Wh1) //Create a Bar Chart series bound to the "Value" property.
+                                .Name("Wh1");
+      })
+      .CategoryAxis(axis => axis
+          .Categories(model => model.DT)
+      )
+      )
+
+@*<script type="text/x-kendo-tmpl" id="template">
+    <li class="col-xs-6 col-md-4 col-lg-2">
+        <figure>
+            <figcaption class="hidden-xs">
+                <h4>#: Node #</h4>
+                <p class="hidden-sm">
+                    #: E1 #
+                </p>
+            </figcaption>
+        </figure>
+    </li>
+</script>
+
+@(Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
+      .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
+      .TagName("div") //The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
+      .ClientTemplateId("template") //This template will be used for rendering the ListView items.
+      .DataSource(datasource => datasource
+        .Ajax()
+        .Read(read => read.Action("ListRead","Packets"))
+        ) 
+      .Pageable() //Enable paging.
+      )*@
+
+
+@*@foreach (var item in Model)
+{
+    @(Html.Kendo().Chart(Model)
+          .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
+          .Title("Internet Users")
+          .Series(series => {
+                                series.Bar(model => model.V) //Create a Bar Chart series bound to the "Value" property.
+                                    .Name("United States");
+          })
+          .CategoryAxis(axis => axis
+              .Categories(model => model.DT)
+          )
+          )
+}*@
+
