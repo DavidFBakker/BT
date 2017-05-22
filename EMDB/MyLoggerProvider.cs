@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging;
 
 namespace EMDB
@@ -25,7 +26,12 @@ namespace EMDB
             {
                 try
                 {
-                    File.AppendAllText(@"C:\temp\log.txt", formatter(state, exception));
+                    if ( RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                        File.AppendAllText(@"/tmp/log.txt", formatter(state, exception));
+
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                        File.AppendAllText(@"C:\temp\log.txt", formatter(state, exception));
+
                     Console.WriteLine(formatter(state, exception));
                 }
                 catch (Exception) { }

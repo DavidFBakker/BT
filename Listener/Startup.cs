@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using EMDB;
 using EMDB.Models;
 using Microsoft.AspNetCore.Builder;
@@ -22,6 +23,16 @@ namespace Listener
         {
         }
 
+        private static string OS()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                return "Linux";
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                return "Windows";
+
+            return "Who Knows";
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -32,9 +43,12 @@ namespace Listener
           //  var db = new DB();
 
             loggerFactory.AddConsole();
-
+            var logger = loggerFactory.CreateLogger("Info");
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
+
+            logger.LogInformation($"SQL Connection: {DB.ConnectionString()}");
+            logger.LogInformation($"OS: {OS()}");
 
             app.Run(async context =>
             {
@@ -50,11 +64,11 @@ namespace Listener
                             using (var dbContext = DB.GetContext())
                             {
                                 res =
-                                    dbContext.Packets.Where(a => a.Node == ds.Node && a.DT >= DateTime.Now.AddMinutes(-10))
-                                        .OrderByDescending(b => b.DT)
+                                    dbContext.Packets.Where(a => a.Node == ds.Node )
+                                        .OrderByDescending(b => b.DT).Take(1)
                                         .FirstOrDefault();
 
-                                if (res != null)
+                                if (res != null && res.DT  >= DateTime.Now.AddMinutes(-10))
                                 {
                                     Packets[ds.Node] = res;
                                     Packets[ds.Node].Add(ds);
@@ -106,7 +120,7 @@ namespace Listener
 
                         Packets[ds.Node].DT = DateTime.Now;
 
-                        var logger = loggerFactory.CreateLogger("Info");
+                      
 
                         //logger.LogInformation
                         logger.LogInformation(
@@ -143,11 +157,19 @@ namespace Listener
                         //Console.WriteLine($"{Packets[ds.Node].Wh31} {Packets[ds.Node].P31} {Packets[ds.Node].Delta31}");
                         //Console.WriteLine($"{Packets[ds.Node].Wh32} {Packets[ds.Node].P32} {Packets[ds.Node].Delta32}");
                         //Console.WriteLine($"{ds.SecCounter} {ds.SC} {ds.X} {ds.V}");
-                        
-                        using (var dbContext = DB.GetContext())
+
+                        try
                         {
-                            await dbContext.Packets.AddAsync(Packets[ds.Node]);
-                            await dbContext.SaveChangesAsync();
+                            using (var dbContext = DB.GetContext())
+                            {
+                                await dbContext.Packets.AddAsync(Packets[ds.Node]);
+                                await dbContext.SaveChangesAsync();
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.LogError("11",ex);
+                            var aa = ex.Message;
                         }
 
                         await context.Response.WriteAsync("ok");

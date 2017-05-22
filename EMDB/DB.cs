@@ -15,9 +15,19 @@ using Microsoft.Extensions.Logging;
 
 namespace EMDB
 {
-
     public static class DB
     {
+
+        public static string ConnectionString()
+        {
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
+
+            var connection = configuration.GetConnectionString("DefaultConnection");
+            return connection;
+        }
         public static EMContext GetContext(bool withLogging=false)
         {
             var configuration = new ConfigurationBuilder()
@@ -26,7 +36,7 @@ namespace EMDB
                 .Build();
 
             var connection = configuration.GetConnectionString("DefaultConnection");
-
+            
             var optionsBuilder = new DbContextOptionsBuilder<EMContext>();
             optionsBuilder.UseSqlServer(connection);
             var db = new EMContext(optionsBuilder.Options);
@@ -39,9 +49,9 @@ namespace EMDB
             return db;
         }
 
-        public static async Task<IEnumerable<Packet>> GetPackets( int minuteSpan)
+        public static async Task<IEnumerable<Packet>> GetPackets( int minuteSpan, bool log=false)
         {            
-            return await GetPackets(GetContext(), minuteSpan);
+            return await GetPackets(GetContext(log), minuteSpan);
         }
 
        
@@ -225,14 +235,14 @@ namespace EMDB
 
                 });
 
-            var param = Expression.Parameter(typeof(int), "p");
-            var exp = Expression.Lambda<Func<int, bool>>(
-                Expression.Equal(
-                    Expression.Property(param, "Name"),
-                    Expression.Constant("Bob")
-                ),
-                param
-            );
+            //var param = Expression.Parameter(typeof(int), "p");
+            //var exp = Expression.Lambda<Func<int, bool>>(
+            //    Expression.Equal(
+            //        Expression.Property(param, "Name"),
+            //        Expression.Constant("Bob")
+            //    ),
+            //    param
+            //);
             
 
             ret = await q.ToListAsync();
