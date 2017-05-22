@@ -1,6 +1,4 @@
-﻿@using EMDB
-@using Microsoft.VisualStudio.Web.CodeGeneration
-@model IEnumerable<EMDB.Packet>
+﻿@model IEnumerable<EMDB.Packet>
 
 @{
     ViewBag.Title = "Graphs";
@@ -9,23 +7,32 @@
 
 <h2>@ViewData["Title"].</h2>
 
+@(Html.Kendo().ListBox()
+      .Name("optional")
+      .Toolbar(toolbar =>
+      {
+          toolbar.Position(ListBoxToolbarPosition.Right);
+          toolbar.Tools(tools => tools
+              .MoveUp()
+              .MoveDown()
+              );
+      })
+      .HtmlAttributes(new { title = "Input" })
+      .DataSource(source => source
+          .Custom()
+          .Transport(transport => transport
+              .Read(read => read.Action("ValidInputs", "Packets"))
+          ))
+      )
 
 @(Html.Kendo().Chart(Model)
       .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
       .Title("Internet Users")
-      .Series(series => {
-                            series.Area(model => model.Wh1); //Create a Bar Chart series bound to the "Value" property.
-
-
+      .Series(series => { series.Area(model => model.Wh1); //Create a Bar Chart series bound to the "Value" property.
       })
       .CategoryAxis(axis => axis
           .Categories(model => model.DT)
-        
-
-      ).ValueAxis(axis => axis
-      .Numeric()
-      .MajorTicks(mjt => mjt
-        .Step(216)))
+      )
       )
 
 @*<script type="text/x-kendo-tmpl" id="template">
@@ -67,4 +74,3 @@
           )
           )
 }*@
-
