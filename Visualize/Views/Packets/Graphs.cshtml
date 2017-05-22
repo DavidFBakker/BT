@@ -1,4 +1,7 @@
-﻿@model IEnumerable<EMDB.Packet>
+﻿<script src="lib/kendo-ui/js/jquery.min.js"></script>
+<script src="lib/kendo-ui/js/kendo.all.min.js"></script>
+@using EMDB
+@*@model IEnumerable<EMDB.Packet>*@
 
 @{
     ViewBag.Title = "Graphs";
@@ -8,7 +11,7 @@
 <h2>@ViewData["Title"].</h2>
 
 @(Html.Kendo().ListBox()
-      .Name("optional")
+      .Name("ValidInputsList")
       .Toolbar(toolbar =>
       {
           toolbar.Position(ListBoxToolbarPosition.Right);
@@ -17,23 +20,47 @@
               .MoveDown()
               );
       })
-      .HtmlAttributes(new { title = "Input" })
+      .HtmlAttributes(new {title = "Input"})
       .DataSource(source => source
           .Custom()
           .Transport(transport => transport
               .Read(read => read.Action("ValidInputs", "Packets"))
           ))
+      .Events(events => events.Change("onChange"))
       )
 
-@(Html.Kendo().Chart(Model)
-      .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
-      .Title("Internet Users")
-      .Series(series => { series.Area(model => model.Wh1); //Create a Bar Chart series bound to the "Value" property.
-      })
+@(Html.Kendo().Chart<Packet>()
+      .Name("powerChart")
+      .Title("Power")
+      .Series(series => { series.Area(model => model.Wh1); })
       .CategoryAxis(axis => axis
           .Categories(model => model.DT)
       )
+      //.DataSource(ds => ds
+      //    .Read(read => read.Action("GraphData", "Packets"))//.Data("getListSelection"))
+      //)
       )
+
+<script>
+
+    function onChange(e) {
+        //$("#powerChart").data("kendoChart").options.data.read
+        var selection = getListSelection();
+        alert("Selection: " + selection);
+        $("#powerChart").data("kendoChart").dataSource.read({"selection": selection} );
+        $("#powerChart").data("kendoChart").refresh();
+        //  chart.dataSource.read();
+        //chart.refresh();
+    }
+
+    function getListSelection(e) {
+
+        var dbConnObj  = $("#ValidInputsList").data("kendoListBox");
+        var index = dbConnObj.select().index(), selected =  dbConnObj.dataSource.view()[index];
+               
+        return selected;     
+    }
+</script>
 
 @*<script type="text/x-kendo-tmpl" id="template">
     <li class="col-xs-6 col-md-4 col-lg-2">
@@ -55,7 +82,7 @@
       .DataSource(datasource => datasource
         .Ajax()
         .Read(read => read.Action("ListRead","Packets"))
-        ) 
+        )
       .Pageable() //Enable paging.
       )*@
 

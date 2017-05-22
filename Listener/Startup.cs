@@ -29,7 +29,7 @@ namespace Listener
             Packets = new Dictionary<string, Packet>();
 
 
-            var db = new DB();
+          //  var db = new DB();
 
             loggerFactory.AddConsole();
 
@@ -47,7 +47,7 @@ namespace Listener
                         {
                             Packet res = null;
 
-                            using (var dbContext = db.GetContext())
+                            using (var dbContext = DB.GetContext())
                             {
                                 res =
                                     dbContext.Packets.Where(a => a.Node == ds.Node && a.DT >= DateTime.Now.AddMinutes(-10))
@@ -144,7 +144,7 @@ namespace Listener
                         //Console.WriteLine($"{Packets[ds.Node].Wh32} {Packets[ds.Node].P32} {Packets[ds.Node].Delta32}");
                         //Console.WriteLine($"{ds.SecCounter} {ds.SC} {ds.X} {ds.V}");
                         
-                        using (var dbContext = db.GetContext())
+                        using (var dbContext = DB.GetContext())
                         {
                             await dbContext.Packets.AddAsync(Packets[ds.Node]);
                             await dbContext.SaveChangesAsync();

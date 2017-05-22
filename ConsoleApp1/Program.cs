@@ -10,9 +10,9 @@ namespace ConsoleApp1
         {
             var incMins = 60;
             Console.WriteLine("Hello World!");
-           var db = new EMDB.DB();
+         //  var db = new EMDB.DB();
 
-            db.GetPackets(incMins);
+           DB.GetPackets(incMins);
         }
     }
 

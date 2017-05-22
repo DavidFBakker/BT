@@ -202,7 +202,7 @@ namespace Visualize
 
             //ViewBag.Packets = model;
             var model = await _context.Packets.Take(10).ToListAsync();
-            ViewBag.inputs = _validInputs;
+           // ViewBag.inputs = _validInputs;
             return View(model);
         }
 
@@ -354,19 +354,21 @@ namespace Visualize
             return _context.Packets.Any(e => e.DT == id);
         }
 
-        public async Task<IActionResult> Graphs()
+        public IActionResult Graphs()
         {
 
-            var db = new EMDB.DB();
+            // var db = new EMDB.DB();
 
-            var model=db.GetPackets(20).ToList();
+            //var interval = (60 / 5) * 15;
 
-//            var model = await _context.Packets.Where(a=> a.Node=="Left Panel" && a.DT.Date==DateTime.Today.Date).OrderBy(a=>a.DT).ToListAsync();
+            //var model = DB.GetPackets(_context,interval);
+
+            ////            var model = await _context.Packets.Where(a=> a.Node=="Left Panel" && a.DT.Date==DateTime.Today.Date).OrderBy(a=>a.DT).ToListAsync();
 
 
-            return View(model);
+            //return View(model.Result);
 
-         //   return View();
+            return View();
         }
 
         public async Task<IActionResult> ListRead([DataSourceRequest] DataSourceRequest request)
@@ -381,6 +383,19 @@ namespace Visualize
         public JsonResult ValidInputs()
         {
             return Json(_validInputs);
+        }
+
+        public async Task<IActionResult> GraphData(string selection)
+        {
+            var interval = (60 / 5) * 15;
+        //    var db = new EMDB.DB();
+            
+            var result =  await DB.GetPackets(_context,interval);
+            var model= result.ToList();
+            
+            //  var j = Json(result.Result);
+
+            return View(model);
         }
     }
 }
