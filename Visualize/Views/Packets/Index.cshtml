@@ -1,5 +1,5 @@
 @using EMDB
-@model IEnumerable<EMDB.Packet>
+@model IEnumerable<EMDB.Plot>
 
 @{
     ViewData["Title"] = "Index";
@@ -48,9 +48,9 @@
       .Columns(columns =>
       {
           columns.Bound(p => p.DT).Title("Date");
-          columns.Bound(p => p.Node).Title("Node Name").Width(130);
-          columns.Bound(p => p.E1).Title("E1").Width(130);
-          columns.Bound(p => p.W1).Width(130);
+          columns.Bound(p => p.Value).Title("Value").Width(130);
+          //columns.Bound(p => p.E1).Title("E1").Width(130);
+          //columns.Bound(p => p.W1).Width(130);
       })
       .HtmlAttributes(new { style = "height: 550px;" })
       .Pageable( pageable => pageable
@@ -58,12 +58,12 @@
           .Numeric(false)
       )
       .Sortable()
-      .Scrollable(scr=>scr.Height(430)) 
-      .Filterable()    
+      .Scrollable(scr=>scr.Height(430))
+      .Filterable()
       .DataSource(dataSource => dataSource
           .Ajax()
           .PageSize(20)
-          .ServerOperation(false)        
+          .ServerOperation(false)
       )
       )
 

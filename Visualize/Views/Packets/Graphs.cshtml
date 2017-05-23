@@ -1,6 +1,6 @@
-﻿<script src="lib/kendo-ui/js/jquery.min.js"></script>
-<script src="lib/kendo-ui/js/kendo.all.min.js"></script>
-@using EMDB
+﻿@using EMDB
+@*<script src="lib/kendo-ui/js/jquery.min.js"></script>
+<script src="lib/kendo-ui/js/kendo.all.min.js"></script>*@
 @*@model IEnumerable<EMDB.Packet>*@
 
 @{
@@ -10,16 +10,8 @@
 
 <h2>@ViewData["Title"].</h2>
 
-@(Html.Kendo().ListBox()
+@(Html.Kendo().DropDownList()
       .Name("ValidInputsList")
-      .Toolbar(toolbar =>
-      {
-          toolbar.Position(ListBoxToolbarPosition.Right);
-          toolbar.Tools(tools => tools
-              .MoveUp()
-              .MoveDown()
-              );
-      })
       .HtmlAttributes(new {title = "Input"})
       .DataSource(source => source
           .Custom()
@@ -27,18 +19,19 @@
               .Read(read => read.Action("ValidInputs", "Packets"))
           ))
       .Events(events => events.Change("onChange"))
+      .SelectedIndex(0)
       )
 
-@(Html.Kendo().Chart<Packet>()
+@(Html.Kendo().Chart<Plot>()
       .Name("powerChart")
       .Title("Power")
-      .Series(series => { series.Area(model => model.Wh1); })
+      .Series(series => { series.Area(model => model.Value); })
       .CategoryAxis(axis => axis
           .Categories(model => model.DT)
       )
-      //.DataSource(ds => ds
-      //    .Read(read => read.Action("GraphData", "Packets"))//.Data("getListSelection"))
-      //)
+      .DataSource(ds => ds
+          .Read(read => read.Action("GraphData", "Packets").Data("getListSelection"))
+      )
       )
 
 <script>
@@ -46,8 +39,9 @@
     function onChange(e) {
         //$("#powerChart").data("kendoChart").options.data.read
         var selection = getListSelection();
-        alert("Selection: " + selection);
-        $("#powerChart").data("kendoChart").dataSource.read({"selection": selection} );
+        alert("Selection: " + selection.selection);
+        //  $("#powerChart").data("kendoChart").dataSource.read({"selection": selection} );
+        $("#powerChart").data("kendoChart").dataSource.read(selection);
         $("#powerChart").data("kendoChart").refresh();
         //  chart.dataSource.read();
         //chart.refresh();
@@ -55,10 +49,15 @@
 
     function getListSelection(e) {
 
-        var dbConnObj  = $("#ValidInputsList").data("kendoListBox");
-        var index = dbConnObj.select().index(), selected =  dbConnObj.dataSource.view()[index];
-               
-        return selected;     
+        //var dbConnObj  = $("#ValidInputsList").data("kendoListBox");
+        //var index = dbConnObj.select().index(), selected =  dbConnObj.dataSource.view()[index];
+
+        ////return selected;
+        //return { "selection": selected };
+
+        return {
+            selection: $("#ValidInputsList").data("kendoDropDownList").text()
+        };
     }
 </script>
 

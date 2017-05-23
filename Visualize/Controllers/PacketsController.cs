@@ -201,9 +201,15 @@ namespace Visualize
             //var model = await _context.Packets.Take(10).ToListAsync
 
             //ViewBag.Packets = model;
-            var model = await _context.Packets.Take(10).ToListAsync();
-           // ViewBag.inputs = _validInputs;
-            return View(model);
+          //  var model = await _context.Packets.Take(10).ToListAsync();
+            // ViewBag.inputs = _validInputs;
+            var interval = (60 / 5) * 15;
+            var res = DB.GetPacketsQ(_context, interval, "Left Panel", Constants.InputType.V, 6).ToList();
+            var res2 = res.ToDataSourceResult(new DataSourceRequest()).Data;
+
+            var r = Json(res2);
+
+            return View(res);
         }
 
         public async Task<IActionResult> ReadPacketsAsync([DataSourceRequest] DataSourceRequest request)
@@ -382,20 +388,20 @@ namespace Visualize
 
         public JsonResult ValidInputs()
         {
-            return Json(_validInputs);
+            var r = Json(_validInputs);
+            return r;
         }
 
-        public async Task<IActionResult> GraphData(string selection)
+        public ActionResult GraphData()//string selection="")
         {
             var interval = (60 / 5) * 15;
-        //    var db = new EMDB.DB();
-            
-            var result =  await DB.GetPackets(_context,interval);
-            var model= result.ToList();
-            
-            //  var j = Json(result.Result);
+        
+            var res = DB.GetPacketsQ(_context, interval, "Left Panel", Constants.InputType.V,6).ToList();
+               var res2=res.ToDataSourceResult(new DataSourceRequest()).Data;
 
-            return View(model);
+            var r= Json(res2);
+            return r;
+            return Json(res);
         }
     }
 }

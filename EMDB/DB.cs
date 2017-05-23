@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
@@ -12,12 +13,16 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Linq.Dynamic;
+using System.Linq.Dynamic.Core;
+using System.Reflection.Metadata.Ecma335;
 
 namespace EMDB
 {
+   
     public static class DB
     {
-
+       
         public static string ConnectionString()
         {
             var configuration = new ConfigurationBuilder()
@@ -66,7 +71,7 @@ namespace EMDB
                     i => i)
                 .Select(n => new Packet
                 {
-                    DT = n.Key,
+                   DT = n.Key,
                     Delta1 = n.Average(a => a.Delta1),
                     Delta10 = n.Average(a => a.Delta10),
                     Delta11 = n.Average(a => a.Delta11),
@@ -235,40 +240,35 @@ namespace EMDB
 
                 });
 
-            //var param = Expression.Parameter(typeof(int), "p");
-            //var exp = Expression.Lambda<Func<int, bool>>(
-            //    Expression.Equal(
-            //        Expression.Property(param, "Name"),
-            //        Expression.Constant("Bob")
-            //    ),
-            //    param
-            //);
-            
-
             ret = await q.ToListAsync();
             //}
             return ret;
             //}
         }
+
+
+
+        public static IEnumerable<Plot> GetPacketsQ(EMContext dbContext, int minuteSpan,string node, Constants.InputType inputEnum, int take=100)
+        {
+
+            var t = inputEnum.ToString();
+
+           var  qstring = $"new(DT , {t} as Value)";
+
+            var q22 = dbContext.Packets.Where($"Node = \"{node}\"").Take(take);
+
+            var q = q22.Select(qstring).ToDynamicList();
+
+            var r = q.Select(a => new Plot {DT = a.DT, Value = a.Value});
+         
+            return r;
+         
+        }
     }
 
-
-    internal static class ext
+    public class Plot
     {
-        //public static long ToUnixTime(this DateTime date)
-        //{
-        //    var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        //    return Convert.ToInt64((date - epoch).TotalSeconds);
-        //}
-
-        public static DateTime RoundToNearestInterval(this DateTime dt, TimeSpan d)
-        {
-            var f = 0;
-            var m = (double) (dt.Ticks % d.Ticks) / d.Ticks;
-            if (m >= 0.5)
-                f = 1;
-            return new DateTime((dt.Ticks / d.Ticks + f) * d.Ticks);
-        }
-
+        public DateTime DT { get; set; }
+        public double Value { get; set; }
     }
 }

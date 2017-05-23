@@ -24,10 +24,9 @@ namespace ConsoleApp1
             Console.WriteLine($"SQL Connection: {DB.ConnectionString()}");
             Console.WriteLine($"OS: {OS()}");
 
-            //  var db = new EMDB.DB();
+         
+            var res = DB.GetPacketsQ(DB.GetContext(true), incMins, "Left Panel",Constants.InputType.V).Result.ToList();
 
-            //var res =  DB.GetPackets(incMins,true).Result.ToList();
-            var res = DB.GetContext().Packets.Take(10).ToList();
             Console.WriteLine($"Found {res.Count} rows");
         }
     }
