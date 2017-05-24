@@ -1,0 +1,287 @@
+﻿@using EMDB
+<script src="~/lib/kendo-ui/js/jquery.min.js"></script>
+<script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    @*<div class="col-xs-4 col-md-3 placeholder">
+        <img class="img-responsive" alt="200x200" src="~/Images/200.png">
+    </div>*@
+    @*<div class="col-xs-12 col-md-9">
+		<div class="row">
+			<div class="col-xs-12 col-md-12">
+				<h2>Lorem ipsum...</h2>
+			</div>
+		</div>
+	    <div class="row">
+			<div class="col-xs-12 col-md-4">
+				<p>
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+					Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+					galley of type and scrambled it to make a type specimen book.
+				</p>
+
+				<p>
+					@(Html.Kendo()
+				.Button()
+				.Name("PrimaryButton")
+				.Content("Primary Button")
+				.HtmlAttributes(new { @class = "textButton k-primary" }))
+				</p>
+			</div>
+
+			<div class="col-xs-12 col-md-4">
+				<p>
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+					Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+					galley of type and scrambled it to make a type specimen book.
+				</p>
+				<p>
+					@(Html.Kendo()
+				.Button()
+				.Name("TextButton")
+				.Content("Button")
+				.HtmlAttributes(new { @class = "textButton" }))
+				</p>
+
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<p>
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+					Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+					galley of type and scrambled it to make a type specimen book.
+				</p>
+
+				<p>
+					@(Html.Kendo()
+				.Button()
+				.Name("Button")
+				.Content("Button")
+				.HtmlAttributes(new { @class = "textButton" }))
+				</p>
+
+			</div>
+		</div>
+        
+	  
+	</div>*@
+
+</div>
+
+<div class="row">
+    <div class="col-xs-18 col-md-12">
+     
+        @(Html.Kendo().DatePicker()
+              .Name("dtStart")
+              .Min((DateTime)ViewData["MinDate"])
+              .Max((DateTime)ViewData["EndDate"])
+              .Value((DateTime) ViewData["StartDate"])
+              .Events(events => events.Change("dtStartChange")))
+
+        @(Html.Kendo().DatePicker()
+              .Name("dtEnd")
+              .Min((DateTime)ViewData["StartDate"])
+              .Max((DateTime)ViewData["EndDate"])
+              .Value((DateTime)ViewData["EndDate"])
+              .Events(events => events.Change("dtEndChange"))
+              )
+        
+
+        @(Html.Kendo().DropDownList()
+              .Name("ValidZoom")
+              .DataSource(source => source
+                  .Custom()
+                  .Transport(transport => transport
+                      .Read(read => read.Action("ValidZooms", "Grid"))
+                  ))
+              .Events(events => events.Change("onZoomChange"))
+              .SelectedIndex(1)
+        )
+
+        @(Html.Kendo().DropDownList()
+              .Name("ValidInputsList")
+              .HtmlAttributes(new {title = "Input"})
+              .DataSource(source => source
+                  .Custom()
+                  .Transport(transport => transport
+                      .Read(read => read.Action("ValidInputs", "Grid"))
+                  ))
+              .Events(events => events.Change("onChange"))
+              .SelectedIndex(0)
+              )
+
+        @(Html.Kendo().Button()
+              .Name("imageButton")
+              .HtmlAttributes(new { type = "button" })            
+              .Content("Refresh")
+              .Events(events=>events.Click("onimageButtonClick"))
+              )
+        <div id="container">
+            <div id="chart">
+                @(Html.Kendo().Chart<Plot>()
+                      .Name("powerChart")
+                      .Title("Power")
+                      .DataSource(ds => ds
+                          .Read(read => read.Action("GraphData", "Grid")) //.Data("getListSelection"))//)
+                      )
+                      .Legend(legend => legend
+                          .Position(ChartLegendPosition.Bottom)
+                      )
+                      .SeriesDefaults(sd => sd.Area())
+                      .Series(series =>
+                      {
+                          series
+                              .Area(d => d.Value, model => model.DT)
+                              .Line(line => line
+                                  .Style(ChartSeriesLineStyle.Smooth)
+                              )
+                              .Aggregate(ChartSeriesAggregate.Avg)
+                              .Name("");
+
+                      }
+                      )
+                      .CategoryAxis(axis => axis
+                          .Date()
+                          .BaseUnit(ChartAxisBaseUnit.Fit)
+
+                          .Categories(model => model.DT)
+                          .Labels(labels =>
+                              labels
+                                  .Rotation(-45)
+                                  .Format("{0:MM/dd/yy H:mm:ss}")
+                          //.Skip(60).Step(60)
+                          )
+                          .MajorGridLines(lines => lines.Visible(false))
+
+                      )
+                      .Events(events => events
+                          .DataBound("onDataBound")
+                      )
+                      )
+            </div>
+        </div>
+            @(Html.Kendo().Grid<Plot>()
+              .Name("powerGrid")
+              .Columns(columns =>
+              {
+                  columns.Bound(p => p.DT).Title("Date").Format("{0:MM/dd/yy H:mm:ss}");
+                  columns.Bound(p => p.Value).Title("Value").Width(130);
+              })
+              .Pageable()
+              .Sortable()
+              .Scrollable()
+              .Filterable()
+              .HtmlAttributes(new { style = "height:550px;" })
+              .DataSource(dataSource => dataSource
+                  .Ajax()
+                  .PageSize(120)
+                  .Read(read => read.Action("GridData", "Grid"))
+              )
+            )
+
+        </div>
+</div>
+
+
+<script>
+
+ 
+    function onDataBound(e) {
+        kendo.ui.progress($("#container"), false);
+        var selection = $("#ValidInputsList").data("kendoDropDownList").text();// getListSelection();
+
+        var chart = this;
+        var series = chart.options.series;
+
+        series[0].name = selection;
+        chart.redraw();
+    }
+
+    function onimageButtonClick(e) {
+        update();
+    }
+
+    function onChange(e) {
+        update();
+       
+    }
+
+    function getJson() {
+        return {
+            selection: $("#ValidInputsList").data("kendoDropDownList").text(), startDate: $("#dtStart").data("kendoDatePicker").value(), endDate: $("#dtEnd").data("kendoDatePicker").value()
+        };
+    }
+
+    function update() {
+        kendo.ui.progress($("#container"), true);
+        var json = getJson();
+
+        var chart = $("#powerChart").data("kendoChart");
+        chart.dataSource.read(json);
+
+        var grid = $("#powerGrid").data("kendoGrid");
+        grid.dataSource.read(json);
+
+    }
+
+    function onZoomChange(e) {
+        var v = this.text();
+        var chart = $("#powerChart").data("kendoChart");
+        var categoryAxis = chart.options.categoryAxis;
+        var labels = categoryAxis.labels;
+
+        categoryAxis.baseUnit = v.toLowerCase();
+        var skip = 0;
+        var step = 0;
+        if (v === "Minutes") {
+            skip = 60;
+            step = skip;
+        } else if (v === "Seconds") {
+            skip = 10*60;
+            step = skip;
+        } 
+
+        labels.skip = skip;
+        labels.step = step;
+        
+        chart.refresh();
+
+    }
+
+    //function getListSelection(e) {
+
+    //    return {
+    //        selection: $("#ValidInputsList").data("kendoDropDownList").text()
+    //    };
+    //}
+
+
+    function dtStartChange() {
+        var endPicker = $("#dtEnd").data("kendoDatePicker"),
+            startDate = this.value();
+
+       
+        if (startDate) {
+            startDate = new Date(startDate);                       
+            //  startDate.setDate(startDate.getDate() + 1);
+            endPicker.min(startDate);
+        }
+        update();
+    }
+
+    function dtEndChange() {
+        var startPicker = $("#dtStart").data("kendoDatePicker"),
+            endDate = this.value();
+
+        if (endDate) {
+            endDate = new Date(endDate);
+            //    endDate.setDate(endDate.getDate() - 1);
+            startPicker.max(endDate);
+        }
+
+        update();
+    }
+
+</script>

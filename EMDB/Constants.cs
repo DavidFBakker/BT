@@ -1,8 +1,14 @@
+#region Using Directives
+
+using System;
+
+#endregion
+
 namespace EMDB
 {
     public class Constants
     {
-        public enum InputType 
+        public enum InputType
         {
             Delta1,
             Delta10,
@@ -170,5 +176,24 @@ namespace EMDB
             W8
         }
 
+        public static string[] ValidInputs
+        {
+            get
+            {
+                var validInputs = Enum.GetNames(typeof(Constants.InputType));
+                return validInputs;
+            }
+        }
+    }
+
+    public static class Extensions{
+
+        
+        public static Constants.InputType ToInputType(this string name)
+        {
+            Constants.InputType def;
+            Enum.TryParse(name, true, out def);
+            return def;
+        }
     }
 }

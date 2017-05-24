@@ -25,7 +25,7 @@ namespace ConsoleApp1
             Console.WriteLine($"OS: {OS()}");
 
          
-            var res = DB.GetPacketsQ(DB.GetContext(true), incMins, "Left Panel",Constants.InputType.V).Result.ToList();
+            var res = DB.GetPacketsQ(DB.GetContext(true), incMins, "Left Panel",Constants.InputType.V).ToList();
 
             Console.WriteLine($"Found {res.Count} rows");
         }
