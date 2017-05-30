@@ -183,6 +183,7 @@ namespace EMDB
 
         public void Add(Packet packet)
         {
+            Node = packet.Node;
             DeltaSeconds = packet.SC - SC;
             SC = packet.SC;
             var doubleervalDiv = DeltaSeconds / 3600;

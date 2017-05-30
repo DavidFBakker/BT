@@ -2,6 +2,7 @@
 
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using EMDB;
 using EMDB.Models;
 using Kendo.Mvc.Extensions;
@@ -28,43 +29,49 @@ namespace Visualize.Controllers
             _context = context;
         }
 
-     
-        public JsonResult ValidInputs()
+
+        public JsonResult ValidInputs(string node = "")
         {
-            return Json(Constants.ValidInputs);
+            if (string.IsNullOrEmpty(node))
+                node = Config.FirstNode;
+
+            //var names = _context.EmToNames.Where(a => a.Node == node).Select(a => a.Name);
+
+            return Json(DB.GetChannelsAsync(node,Config.DbContext).Result);
         }
 
         public JsonResult ValidZooms()
         {
-                var validInputs = Enum.GetNames(typeof(ChartAxisBaseUnit)).OrderBy(a=>a );
-            return Json(validInputs);//new string[6] {"Years", "Months", "Weeks", "Day", "Hours", "Minutes"});
+            var validInputs = Enum.GetNames(typeof(ChartAxisBaseUnit)).OrderBy(a => a);
+            return Json(validInputs);
         }
 
-        public ActionResult GridData([DataSourceRequest] DataSourceRequest request, string selection = "", DateTime? startDate=null, DateTime? endDate = null)
+        public async Task<ActionResult> GridData([DataSourceRequest] DataSourceRequest request, string channel = "",
+            DateTime? startDate = null, DateTime? endDate = null, string node = "")
         {
-            if (startDate == null)
-                startDate = Config.StartDate;
+            //if (startDate == null)
+            //    startDate = Config.StartDate;
 
-            if (endDate == null)
-                endDate = Config.EndDate;
+            //if (endDate == null)
+            //    endDate = Config.EndDate;
 
-            if (String.IsNullOrEmpty(selection))
-            {
-                selection = Constants.ValidInputs[0];
-            }
+          
+            //if (string.IsNullOrEmpty(node))
+            //    node = Config.FirstNode;
 
-            //var interval = 60 / 5 * 15;
-            //var res = DB.GetPacketsQ(_context, interval, "Left Panel", selection.ToInputType(), 6);
+            //if (string.IsNullOrEmpty(channel))
+            //    channel = Config.FirstChannel;
 
-            
-            var res = DB.GetPacketsQ(_context, "Left Panel", selection.ToInputType(), (DateTime)startDate, (DateTime)endDate);
 
+         //   var res = DB.GetPacketsQ(_context, node, channel, (DateTime) startDate, (DateTime) endDate,true);
+            var res = await DB.GetPacketsAsync(_context);
             var r1 = res.ToDataSourceResult(request);
             var r = Json(r1);
             return r;
         }
 
-        public ActionResult GraphData(string selection = "", DateTime? startDate = null, DateTime? endDate = null)
+        public ActionResult GraphData(string channel = "", DateTime? startDate = null, DateTime? endDate = null,
+            string node = "")
         {
             if (startDate == null)
                 startDate = Config.StartDate;
@@ -72,17 +79,24 @@ namespace Visualize.Controllers
             if (endDate == null)
                 endDate = Config.EndDate;
 
-            if (String.IsNullOrEmpty(selection))
-            {
-                selection = Constants.ValidInputs[0];
-            }
+            if (string.IsNullOrEmpty(node))
+                node = Config.FirstNode;
 
-            var interval = 60 / 5 * 15;
+            if (string.IsNullOrEmpty(channel))
+                channel = Config.FirstChannel;
 
-            //var res = DB.GetPacketsQ(_context, interval, "Left Panel", selection.ToInputType(), 6); //.ToList();
-            var res = DB.GetPacketsQ(_context, "Left Panel", selection.ToInputType(), (DateTime)startDate, (DateTime)endDate);
+
+            var res = DB.GetPacketsQ(_context, node, channel, (DateTime) startDate, (DateTime) endDate);
+//            var res = DB.GetPackets(_context);
+  //          var j = res.ToList();
+
             var r = Json(res);
             return r;
+        }
+
+        public IActionResult ValidNodes()
+        {
+            return Json(DB.GetNodesAsync(_context).Result);
         }
     }
 }

@@ -189,11 +189,11 @@ namespace EMDB
     public static class Extensions{
 
         
-        public static Constants.InputType ToInputType(this string name)
-        {
-            Constants.InputType def;
-            Enum.TryParse(name, true, out def);
-            return def;
-        }
+        //public static Constants.InputType ToInputType(this string name)
+        //{
+        //    Constants.InputType def;
+        //    Enum.TryParse(name, true, out def);
+        //    return def;
+        //}
     }
 }

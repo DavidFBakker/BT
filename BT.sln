@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{859EE827-E2F3-4AA7-9F64-3B6C0401F238}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		Notes.txt = Notes.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{5AD9DC74-E998-48B3-B6E8-ECAAB8D1C8A7}"

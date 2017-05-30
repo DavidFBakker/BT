@@ -40,7 +40,7 @@
     </div>
     <div class="container menu-content">
             <div id="responsive-panel">
-                @(Html.Kendo().Menu()
+                @*@(Html.Kendo().Menu()
                     .Name("Menu")
                     .Items(items =>
                     {
@@ -54,7 +54,7 @@
                             .Text("Contact")
                             .Action("Contact", "Home");
                         items.Add().Text("Disabled item").Enabled(false);
-                    })
+                    })*@
                 )
             </div>
             <button id="configure" class="k-rpanel-toggle k-button k-primary btn-toggle"><span class="k-icon k-i-hbars"></span></button>
@@ -62,7 +62,7 @@
     <div class="container body-content">
         @RenderBody()
         <footer class="footer">
-            <span class="text-muted">Copyright © 2002-2017 Telerik.</span>
+            <span class="text-muted">Copyright © 2002-2017 Bixter.</span>
             <span class="text-muted">All rights reserved.</span>
         </footer>
     </div>

@@ -8,33 +8,14 @@ using EMDB.Models;
 namespace EMDB.Migrations
 {
     [DbContext(typeof(EMContext))]
-    partial class EMContextModelSnapshot : ModelSnapshot
+    [Migration("20170525131731_Added inputnames")]
+    partial class Addedinputnames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("EMDB.Channels", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Channel");
-
-                    b.Property<int>("ChannelNumber");
-
-                    b.Property<string>("ChannelType");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Node");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Channels");
-                });
 
             modelBuilder.Entity("EMDB.EmToName", b =>
                 {
@@ -401,22 +382,6 @@ namespace EMDB.Migrations
                     b.HasKey("DT", "Node");
 
                     b.ToTable("Packets");
-                });
-
-            modelBuilder.Entity("EMDB.Plot", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DT");
-
-                    b.Property<string>("Name");
-
-                    b.Property<double>("Value");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Plots");
                 });
         }
     }

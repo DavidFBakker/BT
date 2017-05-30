@@ -8,9 +8,10 @@ using EMDB.Models;
 namespace EMDB.Migrations
 {
     [DbContext(typeof(EMContext))]
-    partial class EMContextModelSnapshot : ModelSnapshot
+    [Migration("20170525211128_Added Plot for Funcntion")]
+    partial class AddedPlotforFuncntion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

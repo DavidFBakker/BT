@@ -21,13 +21,14 @@ namespace ConsoleApp1
         {
             var incMins = 60;
             Console.WriteLine("Hello World!");
-            Console.WriteLine($"SQL Connection: {DB.ConnectionString()}");
+         //   Console.WriteLine($"SQL Connection: {DB.ConnectionString()}");
             Console.WriteLine($"OS: {OS()}");
 
-         
-            var res = DB.GetPacketsQ(DB.GetContext(true), incMins, "Left Panel",Constants.InputType.V).ToList();
+     //    UTIL.CreateChannels();
 
-            Console.WriteLine($"Found {res.Count} rows");
+       //     var res = DB.GetPacketsQ(DB.GetContext(true), incMins, "Left Panel",Constants.InputType.V).ToList();
+
+           // Console.WriteLine($"Found {res.Count} rows");
         }
     }
 

@@ -8,9 +8,10 @@ using EMDB.Models;
 namespace EMDB.Migrations
 {
     [DbContext(typeof(EMContext))]
-    partial class EMContextModelSnapshot : ModelSnapshot
+    [Migration("20170525132603_Added channels")]
+    partial class Addedchannels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -22,10 +23,6 @@ namespace EMDB.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Channel");
-
-                    b.Property<int>("ChannelNumber");
-
-                    b.Property<string>("ChannelType");
 
                     b.Property<string>("Name");
 
@@ -401,22 +398,6 @@ namespace EMDB.Migrations
                     b.HasKey("DT", "Node");
 
                     b.ToTable("Packets");
-                });
-
-            modelBuilder.Entity("EMDB.Plot", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DT");
-
-                    b.Property<string>("Name");
-
-                    b.Property<double>("Value");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Plots");
                 });
         }
     }

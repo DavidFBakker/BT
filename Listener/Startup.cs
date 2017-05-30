@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -16,12 +17,26 @@ namespace Listener
     public class Startup
     {
         private static Dictionary<string, Packet> Packets;
+        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<EMContext>(
+                options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
         }
+
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                .AddEnvironmentVariables();
+            this.Configuration = builder.Build();
+
+        }
+
 
         private static string OS()
         {
@@ -35,19 +50,20 @@ namespace Listener
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,EMContext dbContext)
         {
             Packets = new Dictionary<string, Packet>();
 
+            
+            
+            loggerFactory.AddConsole(LogLevel.Warning);
 
-          //  var db = new DB();
-
-            loggerFactory.AddConsole();
             var logger = loggerFactory.CreateLogger("Info");
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            logger.LogInformation($"SQL Connection: {DB.ConnectionString()}");
+            
+           // logger.LogInformation($"SQL Connection: {DB.ConnectionString()}");
             logger.LogInformation($"OS: {OS()}");
 
             app.Run(async context =>
@@ -56,13 +72,12 @@ namespace Listener
                 {
                     var ds = context.Request.QueryString.Value.ToPacket();
                     if (ds != null)
-                    {
-                        if (!Packets.ContainsKey(ds.Node))
+                    {                        
+                            if (!Packets.ContainsKey(ds.Node))
                         {
                             Packet res = null;
+                            Packets[ds.Node]=new Packet();
 
-                            using (var dbContext = DB.GetContext())
-                            {
                                 res =
                                     dbContext.Packets.Where(a => a.Node == ds.Node )
                                         .OrderByDescending(b => b.DT).Take(1)
@@ -73,11 +88,12 @@ namespace Listener
                                     Packets[ds.Node] = res;
                                     Packets[ds.Node].Add(ds);
                                 }
-                            }
+                        
 
                             if (res == null)
                             {
                                 Packets[ds.Node] = ds;
+                                Packets[ds.Node].Node = ds.Node;
                                 Packets[ds.Node].Delta1 = ds.E1;
                                 Packets[ds.Node].Delta2 = ds.E2;
                                 Packets[ds.Node].Delta3 = ds.E3;
@@ -160,11 +176,10 @@ namespace Listener
 
                         try
                         {
-                            using (var dbContext = DB.GetContext())
-                            {
-                                await dbContext.Packets.AddAsync(Packets[ds.Node]);
-                                await dbContext.SaveChangesAsync();
-                            }
+                         
+                                 dbContext.Packets.AddAsync(Packets[ds.Node]).ConfigureAwait(false);
+                                 dbContext.SaveChangesAsync().ConfigureAwait(false);
+
                         }
                         catch (Exception ex)
                         {
@@ -172,7 +187,7 @@ namespace Listener
                             var aa = ex.Message;
                         }
 
-                        await context.Response.WriteAsync("ok");
+                        await context.Response.WriteAsync("ok").ConfigureAwait(false);
                     }
                 }
             });

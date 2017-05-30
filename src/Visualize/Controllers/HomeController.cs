@@ -13,6 +13,9 @@ namespace Visualize.Controllers
             ViewData["StartDate"] = Config.StartDate;
             ViewData["EndDate"] = Config.EndDate;
             ViewData["MinDate"] = Config.MinDate;
+            ViewData["FirstNode"] = Config.FirstNode;
+            ViewData["FirstChannel"] = Config.FirstChannel;
+
             return View();
         }
 

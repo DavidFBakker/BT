@@ -15,7 +15,8 @@ namespace Visualize
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseStartup<Startup>()
+                .UseStartup<Startup>()                
+                .UseUrls("http://localhost:6400")
                 .Build();
 
             host.Run();

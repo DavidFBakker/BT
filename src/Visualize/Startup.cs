@@ -17,8 +17,10 @@
         {
             var builder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", true, true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true).AddEnvironmentVariables();
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)                
+                .AddEnvironmentVariables();
             this.Configuration = builder.Build();
+            
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -39,10 +41,11 @@
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            
             app.UseStaticFiles();
-
+            
             app.UseMvc(routes => { routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}"); });
-
+            
             // Configure Kendo UI
             app.UseKendo(env);
         }
@@ -59,6 +62,10 @@
 
             // Add Kendo UI services to the services container
             services.AddKendo();
+
+            var sp = services.BuildServiceProvider();
+            var service = sp.GetService<EMContext>();
+            Config.Startup(service);
         }
     }
 }

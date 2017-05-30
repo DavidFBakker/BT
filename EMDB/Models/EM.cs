@@ -20,9 +20,15 @@ namespace EMDB.Models
         {
         }
 
+     
         public DbSet<EmToName> EmToNames { get; set; }
         public DbSet<Packet> Packets { get; set; }
 
+        public DbSet<InputNames> InputNames { get; set; }
+
+        public DbSet<Channels> Channels { get; set; }
+
+        public DbSet<Plot> Plots { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
