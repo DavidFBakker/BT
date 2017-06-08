@@ -1,6 +1,6 @@
-﻿@using EMDB
-<script src="~/lib/kendo-ui/js/jquery.min.js"></script>
-<script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
+﻿@using System
+@using EMDB
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -185,11 +185,16 @@
               .Sortable()
               .Scrollable()
               .Filterable()
-              .HtmlAttributes(new {style = "height:550px;"})
+              .HtmlAttributes(new {style = "height:750px;"})
               .DataSource(dataSource => dataSource
                   .Ajax()
                   .PageSize(120)
                   .Read(read => read.Action("GridData", "Grid"))
+              ).Selectable(selectable => selectable
+                  .Mode(GridSelectionMode.Single).Type(GridSelectionType.Row)
+              )
+        .Events(events => events
+        .Change("powerGridonChange")
               )
               )
         <button id="playButton" class="k-button" style="float: right;">Start update</button>
@@ -205,6 +210,18 @@
          //   step();
         }
     );
+    function powerGridonChange(arg) {           
+        var cell = this.select();        
+        var dataItem = this.dataItem(cell.closest("tr"));
+        var name = dataItem.Name;
+
+        if ($("#ValidInputsList").data("kendoDropDownList").text() === name)
+            return;
+
+        $("#ValidInputsList").data("kendoDropDownList").value(name);
+        update();
+    }
+
 
     function play() {
                

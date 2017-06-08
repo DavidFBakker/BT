@@ -29,6 +29,60 @@ namespace Visualize.Controllers
             _context = context;
         }
 
+        public IActionResult Inputs()
+        {
+            ViewData["StartDate"] = Config.StartDate;
+            ViewData["EndDate"] = Config.EndDate;
+            ViewData["MinDate"] = Config.MinDate;
+            ViewData["FirstNode"] = Config.FirstNode;
+            ViewData["FirstChannel"] = Config.FirstChannel;
+
+
+            //if (string.IsNullOrEmpty(node))
+            //    node = Config.FirstNode;
+
+            //return View(DB.GetChannelsAsync(node, Config.DbContext).Result);
+            var res = DB.GetPlotsNoChannels(_context).Result;
+            return View(res);
+        }
+
+
+
+        public IActionResult Index()
+        {
+            //ViewData["StartDate"] = Config.StartDate;
+            //ViewData["EndDate"] = Config.EndDate;
+            //ViewData["MinDate"] = Config.MinDate;
+            //ViewData["FirstNode"] = Config.FirstNode;
+            //ViewData["FirstChannel"] = Config.FirstChannel;
+
+
+            ////if (string.IsNullOrEmpty(node))
+            ////    node = Config.FirstNode;
+
+            ////return View(DB.GetChannelsAsync(node, Config.DbContext).Result);
+            //var res = DB.GetPlotsNoChannels(_context).Result;
+            //return View(res);
+            return View();
+        }
+
+
+        public IActionResult Grid()
+        {
+            ViewData["StartDate"] = Config.StartDate;
+            ViewData["EndDate"] = Config.EndDate;
+            ViewData["MinDate"] = Config.MinDate;
+            ViewData["FirstNode"] = Config.FirstNode;
+            ViewData["FirstChannel"] = Config.FirstChannel;
+
+            return View();
+            //if (string.IsNullOrEmpty(node))
+            //    node = Config.FirstNode;
+
+            ////return View(DB.GetChannelsAsync(node, Config.DbContext).Result);
+            //var res = DB.GetPlotsNoChannels(_context).Result;
+            //return View(res);
+        }
 
         public JsonResult ValidInputs(string node = "")
         {
@@ -94,6 +148,29 @@ namespace Visualize.Controllers
             return r;
         }
 
+        public ActionResult LinearData(string channel = "", DateTime? startDate = null, DateTime? endDate = null,
+            string node = "")
+        {
+            //if (startDate == null)
+            //    startDate = Config.StartDate;
+
+            //if (endDate == null)
+            //    endDate = Config.EndDate;
+
+            if (string.IsNullOrEmpty(node))
+                node = Config.FirstNode;
+
+            if (string.IsNullOrEmpty(channel))
+                channel = Config.FirstChannel;
+
+
+            var res = DB.GetPacketsAsync(_context).Result.FirstOrDefault(a => a.Name == channel);
+            //            var res = DB.GetPackets(_context);
+            //          var j = res.ToList();
+
+            var r = Json(res);
+            return r;
+        }
         public IActionResult ValidNodes()
         {
             return Json(DB.GetNodesAsync(_context).Result);

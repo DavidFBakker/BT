@@ -1,0 +1,442 @@
+﻿@using System
+@using EMDB
+@model System.Collections.Generic.List<Plot>
+
+@{
+    ViewBag.Title = "Grid";
+    Layout = "_Layout";
+}
+
+<script src="~/lib/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<h2>title</h2>
+<div class="navbar navbar-default navbar-static-top secondnavbar">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".main-nav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse main-nav">
+            <ul class="nav navbar-nav">
+                <li>
+                    @(Html.Kendo().DatePicker()
+                          .Name("dtStart")
+                          .Min((DateTime)ViewData["MinDate"])
+                          .Max((DateTime)ViewData["EndDate"])
+                          .Value((DateTime)ViewData["StartDate"])
+                          .Events(events => events.Change("dtStartChange")))
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                    @(Html.Kendo().DatePicker()
+                          .Name("dtEnd")
+                          .Min((DateTime)ViewData["StartDate"])
+                          .Max((DateTime)ViewData["EndDate"])
+                          .Value((DateTime)ViewData["EndDate"])
+                          .Events(events => events.Change("dtEndChange"))
+                          )
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                    
+                    @(Html.Kendo().DropDownList()
+                          .Name("ValidZoom")
+                          .DataSource(source => source
+                              .Custom()
+                              .Transport(transport => transport
+                                  .Read(read => read.Action("ValidZooms", "Grid"))
+                              ))
+                          .Events(events => events.Change("onZoomChange"))
+                          .SelectedIndex(1)
+                          )
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                    @(Html.Kendo().DropDownList()
+                          .Name("nodeList")
+                          .DataSource(source => source
+                              .Custom()
+                              .Transport(transport => transport
+                                  .Read(read => read.Action("ValidNodes", "Grid"))
+                              ))
+                          .Events(events => events.Change("onNodeChange"))
+                          .SelectedIndex(0)
+                          )
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                    
+                    @(Html.Kendo().DropDownList()
+                          .Name("ValidInputsList")
+                          .HtmlAttributes(new { title = "Input" })
+                          .DataSource(source => source
+                              .Custom()
+                              .Transport(transport => transport
+                                  .Read(read => read.Action("ValidInputs", "Grid"))
+                              ))
+                          .Events(events => events.Change("onChange"))
+                          .SelectedIndex(0)
+                          .HtmlAttributes(new { style = "width:250px" })
+                          )
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                    @(Html.Kendo().Button()
+                          .Name("imageButton")
+                          .HtmlAttributes(new { type = "button" })
+                          .Content("Refresh")
+                          .Events(events => events.Click("onimageButtonClick"))
+                          )
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>  
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row">  
+    <div class="col-sm-18 col-md-12 ">
+        @*@(Html.Kendo().DatePicker()
+              .Name("dtStart")
+              .Min((DateTime)ViewData["MinDate"])
+              .Max((DateTime)ViewData["EndDate"])
+              .Value((DateTime)ViewData["StartDate"])
+              .Events(events => events.Change("dtStartChange")))*@
+
+        @*@(Html.Kendo().DatePicker()
+              .Name("dtEnd")
+              .Min((DateTime)ViewData["StartDate"])
+              .Max((DateTime)ViewData["EndDate"])
+              .Value((DateTime)ViewData["EndDate"])
+              .Events(events => events.Change("dtEndChange"))
+              )*@
+
+
+        @*@(Html.Kendo().DropDownList()
+              .Name("ValidZoom")
+              .DataSource(source => source
+                  .Custom()
+                  .Transport(transport => transport
+                      .Read(read => read.Action("ValidZooms", "Grid"))
+                  ))
+              .Events(events => events.Change("onZoomChange"))
+              .SelectedIndex(1)
+              )*@
+
+        @*@(Html.Kendo().DropDownList()
+              .Name("nodeList")
+              .DataSource(source => source
+                  .Custom()
+                  .Transport(transport => transport
+                      .Read(read => read.Action("ValidNodes", "Grid"))
+                  ))
+              .Events(events => events.Change("onNodeChange"))
+              .SelectedIndex(0)
+              )*@
+
+
+        @*@(Html.Kendo().DropDownList()
+              .Name("ValidInputsList")
+              .HtmlAttributes(new { title = "Input" })
+              .DataSource(source => source
+                  .Custom()
+                  .Transport(transport => transport
+                      .Read(read => read.Action("ValidInputs", "Grid"))
+                  ))
+              .Events(events => events.Change("onChange"))
+              .SelectedIndex(0)
+              .HtmlAttributes(new { style = "width:250px" })
+              )*@
+
+        @*@(Html.Kendo().Button()
+              .Name("imageButton")
+              .HtmlAttributes(new { type = "button" })
+              .Content("Refresh")
+              .Events(events => events.Click("onimageButtonClick"))
+              )*@
+        <button id="playButton" class="k-button" style="float: right;">Start update</button>
+    </div>
+</div>
+
+<div class="row">
+   
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker1'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
+
+
+    <div class="row">
+
+        <div id="chart">
+            @(Html.Kendo().Chart<Plot>()
+              .Name("powerChart")
+              .Title("Power")
+              .DataSource(ds => ds
+                  .Read(read => read.Action("GraphData", "Grid")) //.Data("getListSelection"))//)
+              )
+              .Legend(legend => legend
+                  .Position(ChartLegendPosition.Bottom)
+              )
+              .SeriesDefaults(sd => sd.Area())
+              .Series(series =>
+              {
+                  series
+                      .Area(d => d.Value, model => model.DT)
+                      .Line(line => line
+                          .Style(ChartSeriesLineStyle.Smooth)
+                      )
+                      .Aggregate(ChartSeriesAggregate.Avg)
+                      .Name("");
+              }
+              )
+              .CategoryAxis(axis => axis
+                  .Date()
+                  .BaseUnit(ChartAxisBaseUnit.Fit)
+                  .Categories(model => model.DT)
+                  .Labels(labels =>
+                      labels
+                          .Rotation(-45)
+                          .Format("{0:MM/dd/yy H:mm:ss}")
+                  //.Skip(60).Step(60)
+                  )
+                  .MajorGridLines(lines => lines.Visible(false))
+              )
+              .Events(events => events
+                  .DataBound("onDataBound")
+              )
+              .Transitions(false)
+            )
+        </div>
+    </div>
+
+    <div class="row">
+        @(Html.Kendo().Grid<Plot>()
+          .Name("powerGrid")
+          .Columns(columns =>
+          {
+              columns.Bound(p => p.DT).Title("Date").Format("{0:MM/dd/yy H:mm:ss}").Width(130);
+              columns.Bound(p => p.Name).Title("Input").Width(130);
+              columns.Bound(p => p.Value).Title("Value").Width(130);
+          })
+          .Pageable()
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .HtmlAttributes(new { style = "height:750px;" })
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .PageSize(120)
+              .Read(read => read.Action("GridData", "Grid"))
+          ).Selectable(selectable => selectable
+              .Mode(GridSelectionMode.Single).Type(GridSelectionType.Row)
+          )
+          .Events(events => events
+              .Change("powerGridonChange")
+          )
+        )
+
+
+    </div>
+
+    <script>
+
+        var TICKS_PER_DAY = 3600 * 24, playing;
+        $(document).ready(function () {
+
+        });
+        function powerGridonChange(arg) {
+            var cell = this.select();
+            var dataItem = this.dataItem(cell.closest("tr"));
+            var name = dataItem.Name;
+
+            if ($("#ValidInputsList").data("kendoDropDownList").text() === name)
+                return;
+
+            $("#ValidInputsList").data("kendoDropDownList").value(name);
+            update();
+        }
+
+
+        function play() {
+
+            playing = true;
+
+            step();
+        }
+
+        function stop() {
+            //  clearInterval(fpsUpdateInterval);
+            playing = false;
+            // fpsUpdateInterval = null;
+        }
+
+        $("#playButton").click(function () {
+            var button = $(this);
+
+            if (playing) {
+                stop();
+                button.text("Start update");
+            } else {
+                play();
+                button.html("Pause update");
+            }
+        });
+
+        function onDataBound(e) {
+            if (!playing) {
+                kendo.ui.progress($("#container"), false);
+                var selection = $("#ValidInputsList").data("kendoDropDownList").text();
+
+                var chart = this;
+                var series = chart.options.series;
+
+                series[0].name = selection;
+
+                chart.redraw();
+            }
+        }
+
+        function step() {
+            setTimeout(function () {
+                if (playing) {
+                    var json = getJson();
+
+                    var chart = $("#powerChart").data("kendoChart");
+                    chart.dataSource.read(json);
+
+                    var grid = $("#powerGrid").data("kendoGrid");
+                    grid.dataSource.read(json);
+
+                    playing = true;
+                    chart.refresh();
+
+                    kendo.animationFrame(step);
+
+                }
+            },
+                5000);
+        }
+
+        function onimageButtonClick(e) {
+            update();
+        }
+
+        function onChange(e) {
+            update();
+
+        }
+
+        function getJson() {
+            var sd = $("#dtStart").data("kendoDatePicker").value();
+            var ed = $("#dtEnd").data("kendoDatePicker").value();
+
+            if (playing) {
+                ed = new Date();
+                sd = new Date();
+                sd.setMinutes(sd.getMinutes() - 5);
+
+            }
+
+            return {
+                channel: $("#ValidInputsList").data("kendoDropDownList").text(),
+                startDate: sd,
+                endDate: ed,
+                node: $("#nodeList").data("kendoDropDownList").value()
+            };
+        }
+
+        function update() {
+            if (!playing) {
+                kendo.ui.progress($("#container"), true);
+                var json = getJson();
+
+                var chart = $("#powerChart").data("kendoChart");
+                chart.dataSource.read(json);
+
+                var grid = $("#powerGrid").data("kendoGrid");
+                grid.dataSource.read(json);
+            }
+
+        }
+
+        function onNodeChange(e) {
+            var json = getJson();
+            var list = $("#ValidInputsList").data("kendoDropDownList");
+            list.dataSource.read(json);
+            if (!playing)
+                update();
+
+        }
+
+        function onZoomChange(e) {
+            var v = this.text();
+            var chart = $("#powerChart").data("kendoChart");
+            var categoryAxis = chart.options.categoryAxis;
+            var labels = categoryAxis.labels;
+
+            categoryAxis.baseUnit = v.toLowerCase();
+            var skip = 0;
+            var step = 0;
+
+            if (v === "Minutes") {
+                skip = 60;
+                step = skip;
+            } else if (v === "Seconds") {
+                skip = 10 * 60;
+                step = skip;
+            }
+
+
+            labels.skip = skip;
+            labels.step = step;
+
+            if (!playing)
+                chart.refresh();
+
+        }
+
+
+        function dtStartChange() {
+            var endPicker = $("#dtEnd").data("kendoDatePicker"),
+                startDate = this.value();
+
+
+            if (startDate) {
+                startDate = new Date(startDate);
+                //  startDate.setDate(startDate.getDate() + 1);
+                endPicker.min(startDate);
+            }
+            update();
+        }
+
+        function dtEndChange() {
+            var startPicker = $("#dtStart").data("kendoDatePicker"),
+                endDate = this.value();
+
+            if (endDate) {
+                endDate = new Date(endDate);
+                //    endDate.setDate(endDate.getDate() - 1);
+                startPicker.max(endDate);
+            }
+
+            update();
+        }
+
+    </script>

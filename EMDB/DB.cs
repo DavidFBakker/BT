@@ -59,7 +59,7 @@ namespace EMDB
 
             var ret = dbContext.Packets.Select(a => a.DT).OrderByDescending(a => a).First();
             return ret;
-        }
+        }      
 
         public static IEnumerable<Plot> GetPacketsQ(EMContext dbContext, string node, string channel,
             DateTime startDate, DateTime endDate, bool reverseSort=false)
@@ -88,6 +88,13 @@ namespace EMDB
         public static async Task<List<Plot>> GetPacketsAsync(EMContext dbContext)//,bool reverseSort = false)
         {            
             var res = await dbContext.Plots.FromSql(@"SELECT CAST(ROW_NUMBER()  over (order by name asc)AS INT) [ID],* FROM [dbo].[GetLatestPackets] ()").ToListAsync();
+
+            return res;
+        }
+
+        public static async Task<List<Plot>> GetPlotsNoChannels(EMContext dbContext)//,bool reverseSort = false)
+        {
+            var res = await dbContext.Plots.FromSql(@"SELECT CAST(ROW_NUMBER()  over (order by name asc)AS INT) [ID],* FROM [dbo].[GetLatestPackets] () where Name not like 'Channel%'").ToListAsync();
 
             return res;
         }

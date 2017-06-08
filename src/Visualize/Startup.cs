@@ -44,7 +44,7 @@
             
             app.UseStaticFiles();
             
-            app.UseMvc(routes => { routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}"); });
+            app.UseMvc(routes => { routes.MapRoute("default", "{controller=Grid}/{action=Inputs}/{id?}"); });
             
             // Configure Kendo UI
             app.UseKendo(env);
